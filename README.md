@@ -190,6 +190,3 @@ heartbeats, so failures had no visible reason. The runner now reads every messag
 heartbeat (ignoring ground-station heartbeats), addresses every command to it, reads the flight mode and armed state
 directly from the heartbeat, and prints every `[ArduPilot]` message.
 
-**Flying the new law:** `--law lead_vf` works in the runner (it is in `LAW_NAMES`). The flown comparison used `l1`, `vector_field` and `lead_vf` at `--radius-factor 2.0` and `1.0`, and `vector_field` and `lead_vf` at `0.6`; see "Real autopilot check".
-
-**What to write up:** the questions to answer are (1) do the real-controller results rank the laws as the simulation did, and (2) if not, why not (acceleration limit, response lag)? A result that disagrees with the 2-D model, explained honestly, is worth more than one that matches.
