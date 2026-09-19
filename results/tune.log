@@ -1,0 +1,9 @@
+[   27s] fixed_wing pure_pursuit  default 0.0633 -> tuned 0.0630  {'lookahead_time': 2.3}
+[   65s] fixed_wing l1            default 0.0619 -> tuned 0.0617  {'lookahead_time': 2.3}
+[  168s] fixed_wing vector_field  default 0.1206 -> tuned 0.1120  {'k_e_scale': 0.3623672540110661, 'chi_inf_deg': 56.88672507584053, 'k_chi': 2.8417350025609247, 'feedforward': True}
+[  288s] fixed_wing lead_vf       default 0.0684 -> tuned 0.0646  {'k_e_scale': 1.1431125051818463, 'chi_inf_deg': 80.2015567502747, 'k_chi': 1.2127102002467365, 'feedforward': True, 'lead_time': 1.0942448414759975}
+[  309s] quadcopter pure_pursuit  default 0.0744 -> tuned 0.0646  {'lookahead_time': 1.7}
+[  337s] quadcopter l1            default 0.0735 -> tuned 0.0637  {'lookahead_time': 1.7}
+[  414s] quadcopter vector_field  default 0.1076 -> tuned 0.1054  {'k_e_scale': 0.3623672540110661, 'chi_inf_deg': 56.88672507584053, 'k_chi': 2.8417350025609247, 'feedforward': True}
+[  501s] quadcopter lead_vf       default 0.0678 -> tuned 0.0663  {'k_e_scale': 0.7796697509226772, 'chi_inf_deg': 65.7752601947299, 'k_chi': 1.4640907111786379, 'feedforward': True, 'lead_time': 0.5833821359686557}
+wrote results/tuned_params.json

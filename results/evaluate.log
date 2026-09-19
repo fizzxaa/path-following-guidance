@@ -1,0 +1,60 @@
+[ 104s] fixed_wing done
+[ 208s] fixed_wing done
+[ 270s] quadcopter done
+[ 333s] quadcopter done
+wrote results/heldout.csv 4896 rows
+   vehicle                               subset                              comparison  mean_diff   ci_lo   ci_hi             reading
+fixed_wing                       all conditions           pure_pursuit: tuned - default    -0.0019 -0.0025 -0.0013        tuned better
+fixed_wing                       all conditions                     l1: tuned - default    -0.0017 -0.0024 -0.0011        tuned better
+fixed_wing                       all conditions           vector_field: tuned - default    -0.0063 -0.0084 -0.0042        tuned better
+fixed_wing                       all conditions                lead_vf: tuned - default     0.0023 -0.0001  0.0049 no clear difference
+fixed_wing                       all conditions           tuned pure_pursuit - tuned l1     0.0009  0.0007  0.0012           l1 better
+fixed_wing                       all conditions           tuned vector_field - tuned l1     0.0413  0.0331  0.0504           l1 better
+fixed_wing                       all conditions tuned vector_field - tuned pure_pursuit     0.0403  0.0323  0.0493 pure_pursuit better
+fixed_wing                       all conditions                tuned lead_vf - tuned l1     0.0047  0.0031  0.0063           l1 better
+fixed_wing                       all conditions      tuned lead_vf - tuned vector_field    -0.0366 -0.0448 -0.0292      lead_vf better
+fixed_wing       planned at limit (radius x1.0)           pure_pursuit: tuned - default     0.0016  0.0001  0.0030         tuned worse
+fixed_wing       planned at limit (radius x1.0)                     l1: tuned - default     0.0020  0.0003  0.0036         tuned worse
+fixed_wing       planned at limit (radius x1.0)           vector_field: tuned - default    -0.0047 -0.0088 -0.0007        tuned better
+fixed_wing       planned at limit (radius x1.0)                lead_vf: tuned - default    -0.0112 -0.0178 -0.0044        tuned better
+fixed_wing       planned at limit (radius x1.0)           tuned pure_pursuit - tuned l1     0.0023  0.0017  0.0029           l1 better
+fixed_wing       planned at limit (radius x1.0)           tuned vector_field - tuned l1     0.1003  0.0804  0.1222           l1 better
+fixed_wing       planned at limit (radius x1.0) tuned vector_field - tuned pure_pursuit     0.0980  0.0786  0.1196 pure_pursuit better
+fixed_wing       planned at limit (radius x1.0)                tuned lead_vf - tuned l1     0.0067  0.0040  0.0097           l1 better
+fixed_wing       planned at limit (radius x1.0)      tuned lead_vf - tuned vector_field    -0.0935 -0.1136 -0.0749      lead_vf better
+fixed_wing planned with margin (radius >= x1.5)           pure_pursuit: tuned - default    -0.0036 -0.0041 -0.0030        tuned better
+fixed_wing planned with margin (radius >= x1.5)                     l1: tuned - default    -0.0036 -0.0041 -0.0029        tuned better
+fixed_wing planned with margin (radius >= x1.5)           vector_field: tuned - default    -0.0072 -0.0096 -0.0049        tuned better
+fixed_wing planned with margin (radius >= x1.5)                lead_vf: tuned - default     0.0090  0.0072  0.0108         tuned worse
+fixed_wing planned with margin (radius >= x1.5)           tuned pure_pursuit - tuned l1     0.0002  0.0001  0.0004           l1 better
+fixed_wing planned with margin (radius >= x1.5)           tuned vector_field - tuned l1     0.0118  0.0067  0.0169           l1 better
+fixed_wing planned with margin (radius >= x1.5) tuned vector_field - tuned pure_pursuit     0.0115  0.0066  0.0166 pure_pursuit better
+fixed_wing planned with margin (radius >= x1.5)                tuned lead_vf - tuned l1     0.0036  0.0026  0.0047           l1 better
+fixed_wing planned with margin (radius >= x1.5)      tuned lead_vf - tuned vector_field    -0.0082 -0.0130 -0.0034      lead_vf better
+quadcopter                       all conditions           pure_pursuit: tuned - default    -0.0095 -0.0126 -0.0063        tuned better
+quadcopter                       all conditions                     l1: tuned - default    -0.0092 -0.0124 -0.0058        tuned better
+quadcopter                       all conditions           vector_field: tuned - default    -0.0040 -0.0054 -0.0022        tuned better
+quadcopter                       all conditions                lead_vf: tuned - default    -0.0014 -0.0023 -0.0005        tuned better
+quadcopter                       all conditions           tuned pure_pursuit - tuned l1     0.0008  0.0006  0.0010           l1 better
+quadcopter                       all conditions           tuned vector_field - tuned l1     0.0352  0.0267  0.0449           l1 better
+quadcopter                       all conditions tuned vector_field - tuned pure_pursuit     0.0344  0.0261  0.0439 pure_pursuit better
+quadcopter                       all conditions                tuned lead_vf - tuned l1     0.0017  0.0003  0.0034           l1 better
+quadcopter                       all conditions      tuned lead_vf - tuned vector_field    -0.0335 -0.0416 -0.0261      lead_vf better
+quadcopter       planned at limit (radius x1.0)           pure_pursuit: tuned - default     0.0033 -0.0037  0.0108 no clear difference
+quadcopter       planned at limit (radius x1.0)                     l1: tuned - default     0.0043 -0.0031  0.0121 no clear difference
+quadcopter       planned at limit (radius x1.0)           vector_field: tuned - default    -0.0016 -0.0048  0.0015 no clear difference
+quadcopter       planned at limit (radius x1.0)                lead_vf: tuned - default     0.0018 -0.0000  0.0038 no clear difference
+quadcopter       planned at limit (radius x1.0)           tuned pure_pursuit - tuned l1     0.0019  0.0013  0.0024           l1 better
+quadcopter       planned at limit (radius x1.0)           tuned vector_field - tuned l1     0.0868  0.0694  0.1071           l1 better
+quadcopter       planned at limit (radius x1.0) tuned vector_field - tuned pure_pursuit     0.0850  0.0679  0.1047 pure_pursuit better
+quadcopter       planned at limit (radius x1.0)                tuned lead_vf - tuned l1     0.0075  0.0039  0.0117           l1 better
+quadcopter       planned at limit (radius x1.0)      tuned lead_vf - tuned vector_field    -0.0794 -0.0961 -0.0648      lead_vf better
+quadcopter planned with margin (radius >= x1.5)           pure_pursuit: tuned - default    -0.0159 -0.0180 -0.0137        tuned better
+quadcopter planned with margin (radius >= x1.5)                     l1: tuned - default    -0.0159 -0.0181 -0.0135        tuned better
+quadcopter planned with margin (radius >= x1.5)           vector_field: tuned - default    -0.0052 -0.0075 -0.0028        tuned better
+quadcopter planned with margin (radius >= x1.5)                lead_vf: tuned - default    -0.0030 -0.0037 -0.0023        tuned better
+quadcopter planned with margin (radius >= x1.5)           tuned pure_pursuit - tuned l1     0.0002  0.0001  0.0004           l1 better
+quadcopter planned with margin (radius >= x1.5)           tuned vector_field - tuned l1     0.0094  0.0036  0.0158           l1 better
+quadcopter planned with margin (radius >= x1.5) tuned vector_field - tuned pure_pursuit     0.0091  0.0034  0.0154 pure_pursuit better
+quadcopter planned with margin (radius >= x1.5)                tuned lead_vf - tuned l1    -0.0012 -0.0017 -0.0005      lead_vf better
+quadcopter planned with margin (radius >= x1.5)      tuned lead_vf - tuned vector_field    -0.0105 -0.0164 -0.0051      lead_vf better

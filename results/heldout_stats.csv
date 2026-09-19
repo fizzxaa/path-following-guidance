@@ -1,0 +1,55 @@
+vehicle,subset,comparison,mean_diff,ci_lo,ci_hi,reading
+fixed_wing,all conditions,pure_pursuit: tuned - default,-0.0018814263371205008,-0.002475832120306867,-0.0012972776072594536,tuned better
+fixed_wing,all conditions,l1: tuned - default,-0.0017167365139743197,-0.0023726872766095643,-0.001072167531545426,tuned better
+fixed_wing,all conditions,vector_field: tuned - default,-0.006330655402899489,-0.008404218365340199,-0.004240603418348246,tuned better
+fixed_wing,all conditions,lead_vf: tuned - default,0.002287397575860445,-0.00010880787250184827,0.004850904795145136,no clear difference
+fixed_wing,all conditions,tuned pure_pursuit - tuned l1,0.0009315034624302344,0.0007079201575368007,0.001158251935857745,l1 better
+fixed_wing,all conditions,tuned vector_field - tuned l1,0.041273024175953466,0.0330516034322735,0.05040484175254639,l1 better
+fixed_wing,all conditions,tuned vector_field - tuned pure_pursuit,0.040341520713523225,0.03233792459262255,0.04926146650320563,pure_pursuit better
+fixed_wing,all conditions,tuned lead_vf - tuned l1,0.004659642306611118,0.0031156287573413455,0.006318855948865288,l1 better
+fixed_wing,all conditions,tuned lead_vf - tuned vector_field,-0.03661338186934234,-0.0448316390917433,-0.029158920480247225,lead_vf better
+fixed_wing,planned at limit (radius x1.0),pure_pursuit: tuned - default,0.0015550037536603719,0.00013638683105749464,0.002995845941729954,tuned worse
+fixed_wing,planned at limit (radius x1.0),l1: tuned - default,0.0019592112864340754,0.000334547446996508,0.003636422941707031,tuned worse
+fixed_wing,planned at limit (radius x1.0),vector_field: tuned - default,-0.004677963180335876,-0.008812666920412915,-0.0007190585349950626,tuned better
+fixed_wing,planned at limit (radius x1.0),lead_vf: tuned - default,-0.011233359662132014,-0.01776301400143426,-0.004402796211399381,tuned better
+fixed_wing,planned at limit (radius x1.0),tuned pure_pursuit - tuned l1,0.002295961088694865,0.0017432291340377167,0.0029007292046787773,l1 better
+fixed_wing,planned at limit (radius x1.0),tuned vector_field - tuned l1,0.1002518913566181,0.08042472611118796,0.12223146164327862,l1 better
+fixed_wing,planned at limit (radius x1.0),tuned vector_field - tuned pure_pursuit,0.09795593026792325,0.07858849605837867,0.11957773943531746,pure_pursuit better
+fixed_wing,planned at limit (radius x1.0),tuned lead_vf - tuned l1,0.006714269284077486,0.00396883305209665,0.009722583495208785,l1 better
+fixed_wing,planned at limit (radius x1.0),tuned lead_vf - tuned vector_field,-0.09353762207254063,-0.11355056304456748,-0.07492326529119149,lead_vf better
+fixed_wing,planned with margin (radius >= x1.5),pure_pursuit: tuned - default,-0.0035996413825109368,-0.004130794928279817,-0.0029795065216582,tuned better
+fixed_wing,planned with margin (radius >= x1.5),l1: tuned - default,-0.0035547104141785153,-0.004140166144242391,-0.0028853690414257045,tuned better
+fixed_wing,planned with margin (radius >= x1.5),vector_field: tuned - default,-0.0071570015141812935,-0.009641437833159534,-0.004878974628941115,tuned better
+fixed_wing,planned with margin (radius >= x1.5),lead_vf: tuned - default,0.009047776194856671,0.007241322357260685,0.010762629345437251,tuned worse
+fixed_wing,planned with margin (radius >= x1.5),tuned pure_pursuit - tuned l1,0.00024927464929791937,9.08888387047605e-05,0.0004257188809148912,l1 better
+fixed_wing,planned with margin (radius >= x1.5),tuned vector_field - tuned l1,0.011783590585621145,0.006732071903519924,0.016930427397352725,l1 better
+fixed_wing,planned with margin (radius >= x1.5),tuned vector_field - tuned pure_pursuit,0.011534315936323225,0.00657264564033116,0.01656557406952492,pure_pursuit better
+fixed_wing,planned with margin (radius >= x1.5),tuned lead_vf - tuned l1,0.003632328817877929,0.002556693685676684,0.0046833525865815325,l1 better
+fixed_wing,planned with margin (radius >= x1.5),tuned lead_vf - tuned vector_field,-0.008151261767743214,-0.013007541379099838,-0.0034345014115306875,lead_vf better
+quadcopter,all conditions,pure_pursuit: tuned - default,-0.009504512342147123,-0.012578614545044378,-0.00630623647238206,tuned better
+quadcopter,all conditions,l1: tuned - default,-0.009181432686785103,-0.012445847877946404,-0.005817806912016027,tuned better
+quadcopter,all conditions,vector_field: tuned - default,-0.004012321484491657,-0.005410712577721705,-0.002216461172164712,tuned better
+quadcopter,all conditions,lead_vf: tuned - default,-0.0014218583539779203,-0.0022928911409512555,-0.00046146560400854017,tuned better
+quadcopter,all conditions,tuned pure_pursuit - tuned l1,0.0007806532555418294,0.0005583249818471828,0.00102069210799875,l1 better
+quadcopter,all conditions,tuned vector_field - tuned l1,0.03519784388322671,0.026706359773293987,0.04485640406589569,l1 better
+quadcopter,all conditions,tuned vector_field - tuned pure_pursuit,0.034417190627684884,0.026090695343508104,0.04387476097143774,pure_pursuit better
+quadcopter,all conditions,tuned lead_vf - tuned l1,0.001714300953824601,0.00032425649945470376,0.003399010386665434,l1 better
+quadcopter,all conditions,tuned lead_vf - tuned vector_field,-0.03348354292940211,-0.04164517756631888,-0.026127194734806576,lead_vf better
+quadcopter,planned at limit (radius x1.0),pure_pursuit: tuned - default,0.0033473111197046186,-0.003697622300521152,0.01079619590160171,no clear difference
+quadcopter,planned at limit (radius x1.0),l1: tuned - default,0.004307090883974047,-0.0030727961635350536,0.012140933042244222,no clear difference
+quadcopter,planned at limit (radius x1.0),vector_field: tuned - default,-0.0016190229415870006,-0.004843413908253674,0.0015325761044514756,no clear difference
+quadcopter,planned at limit (radius x1.0),lead_vf: tuned - default,0.0017896500042688588,-4.216188860611418e-05,0.0037881992181466625,no clear difference
+quadcopter,planned at limit (radius x1.0),tuned pure_pursuit - tuned l1,0.001873813355077644,0.0013236703411864776,0.002429499839704475,l1 better
+quadcopter,planned at limit (radius x1.0),tuned vector_field - tuned l1,0.08684136258797903,0.0693586687260471,0.10705682382559698,l1 better
+quadcopter,planned at limit (radius x1.0),tuned vector_field - tuned pure_pursuit,0.08496754923290138,0.06790971139369224,0.10467354486740585,pure_pursuit better
+quadcopter,planned at limit (radius x1.0),tuned lead_vf - tuned l1,0.007465024889846208,0.0038939708965909474,0.011670749443049447,l1 better
+quadcopter,planned at limit (radius x1.0),tuned lead_vf - tuned vector_field,-0.0793763376981328,-0.09613765026131367,-0.06476434691313132,lead_vf better
+quadcopter,planned with margin (radius >= x1.5),pure_pursuit: tuned - default,-0.015930424073072994,-0.017964832078970126,-0.013739045436297927,tuned better
+quadcopter,planned with margin (radius >= x1.5),l1: tuned - default,-0.015925694472164676,-0.018133479883759067,-0.013516552493277321,tuned better
+quadcopter,planned with margin (radius >= x1.5),vector_field: tuned - default,-0.005208970755943989,-0.007531628394923361,-0.002767573876711986,tuned better
+quadcopter,planned with margin (radius >= x1.5),lead_vf: tuned - default,-0.003027612533101312,-0.003694232822421964,-0.0023494467551136815,tuned better
+quadcopter,planned with margin (radius >= x1.5),tuned pure_pursuit - tuned l1,0.00023407320577392322,0.00011566606107362158,0.0003529233812377699,l1 better
+quadcopter,planned with margin (radius >= x1.5),tuned vector_field - tuned l1,0.009376084530850549,0.0035782782237377187,0.01581775600138837,l1 better
+quadcopter,planned with margin (radius >= x1.5),tuned vector_field - tuned pure_pursuit,0.009142011325076624,0.0034007009954111953,0.015427155370227456,pure_pursuit better
+quadcopter,planned with margin (radius >= x1.5),tuned lead_vf - tuned l1,-0.0011610610141862023,-0.0017105454485294434,-0.0005267527489272383,lead_vf better
+quadcopter,planned with margin (radius >= x1.5),tuned lead_vf - tuned vector_field,-0.01053714554503675,-0.0164043621590399,-0.0051133564005700315,lead_vf better

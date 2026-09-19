@@ -1,0 +1,38 @@
+fixed_wing done
+quadcopter done
+\nfixed_wing, typical: mean score by perturbation (lower is better)
+                    pure_pursuit      l1  vector_field  lead_vf
+none                      0.0291  0.0292        0.0264   0.0337
+position noise            0.0299  0.0296        0.0288   0.0340
+velocity noise            0.0313  0.0313        0.0322   0.0379
+sensor delay 0.2 s        0.0309  0.0308        0.0635   0.0340
+response lag x2           0.0428  0.0425        0.0866   0.0353
+airspeed x0.85            0.0228  0.0228        0.0116   0.0250
+combined                  0.0376  0.0371        0.0780   0.0355
+\nfixed_wing, at limit: mean score by perturbation (lower is better)
+                    pure_pursuit      l1  vector_field  lead_vf
+none                      0.0566  0.0550        0.1188   0.0630
+position noise            0.0578  0.0559        0.1205   0.0629
+velocity noise            0.0607  0.0588        0.1235   0.0683
+sensor delay 0.2 s        0.0640  0.0625        0.1596   0.0634
+response lag x2           0.0953  0.0932        0.2157   0.0795
+airspeed x0.85            0.0308  0.0306        0.0342   0.0360
+combined                  0.0841  0.0822        0.1796   0.0761
+\nquadcopter, typical: mean score by perturbation (lower is better)
+                    pure_pursuit      l1  vector_field  lead_vf
+none                      0.0272  0.0272        0.0238   0.0253
+position noise            0.0279  0.0277        0.0246   0.0254
+velocity noise            0.0289  0.0289        0.0265   0.0279
+sensor delay 0.2 s        0.0260  0.0260        0.0402   0.0234
+response lag x2           0.0289  0.0288        0.0436   0.0251
+airspeed x0.85            0.0248  0.0248        0.0185   0.0234
+combined                  0.0304  0.0301        0.0450   0.0272
+\nquadcopter, at limit: mean score by perturbation (lower is better)
+                    pure_pursuit      l1  vector_field  lead_vf
+none                      0.0528  0.0519        0.0960   0.0528
+position noise            0.0540  0.0530        0.0956   0.0534
+velocity noise            0.0564  0.0555        0.0986   0.0574
+sensor delay 0.2 s        0.0576  0.0568        0.1324   0.0569
+response lag x2           0.0700  0.0688        0.1455   0.0682
+airspeed x0.85            0.0293  0.0293        0.0361   0.0278
+combined                  0.0686  0.0674        0.1448   0.0683

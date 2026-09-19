@@ -1,0 +1,84 @@
+{
+  "fixed_wing": {
+    "pure_pursuit": {
+      "params": {
+        "lookahead_time": 2.3
+      },
+      "tuning_score": 0.06296319205318399,
+      "default_tuning_score": 0.06330498197198403,
+      "n_candidates": 16
+    },
+    "l1": {
+      "params": {
+        "lookahead_time": 2.3
+      },
+      "tuning_score": 0.0617436834879157,
+      "default_tuning_score": 0.061896922692506386,
+      "n_candidates": 16
+    },
+    "vector_field": {
+      "params": {
+        "k_e_scale": 0.3623672540110661,
+        "chi_inf_deg": 56.88672507584053,
+        "k_chi": 2.8417350025609247,
+        "feedforward": true
+      },
+      "tuning_score": 0.11200151861934415,
+      "default_tuning_score": 0.1206341876820414,
+      "n_candidates": 61
+    },
+    "lead_vf": {
+      "params": {
+        "k_e_scale": 1.1431125051818463,
+        "chi_inf_deg": 80.2015567502747,
+        "k_chi": 1.2127102002467365,
+        "feedforward": true,
+        "lead_time": 1.0942448414759975
+      },
+      "tuning_score": 0.0645829692886402,
+      "default_tuning_score": 0.06836955254573032,
+      "n_candidates": 61
+    }
+  },
+  "quadcopter": {
+    "pure_pursuit": {
+      "params": {
+        "lookahead_time": 1.7
+      },
+      "tuning_score": 0.06455079905478935,
+      "default_tuning_score": 0.0744020799291218,
+      "n_candidates": 16
+    },
+    "l1": {
+      "params": {
+        "lookahead_time": 1.7
+      },
+      "tuning_score": 0.06369306669459897,
+      "default_tuning_score": 0.07347517118509493,
+      "n_candidates": 16
+    },
+    "vector_field": {
+      "params": {
+        "k_e_scale": 0.3623672540110661,
+        "chi_inf_deg": 56.88672507584053,
+        "k_chi": 2.8417350025609247,
+        "feedforward": true
+      },
+      "tuning_score": 0.10535297822559017,
+      "default_tuning_score": 0.10764933818556674,
+      "n_candidates": 61
+    },
+    "lead_vf": {
+      "params": {
+        "k_e_scale": 0.7796697509226772,
+        "chi_inf_deg": 65.7752601947299,
+        "k_chi": 1.4640907111786379,
+        "feedforward": true,
+        "lead_time": 0.5833821359686557
+      },
+      "tuning_score": 0.06625008284104242,
+      "default_tuning_score": 0.06780136114753277,
+      "n_candidates": 61
+    }
+  }
+}
