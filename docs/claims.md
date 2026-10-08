@@ -30,6 +30,6 @@ unless stated. Gains were tuned on separate routes (seeds 1000-1005); test route
 - The preview-time design rule T* = tau + 1/k_chi; the demand-ratio redesign; the 2.4 m/s^2 a_max inference.
 
 ## Open / not supported by anything run here
-- SITL: single flights, ArduCopter only, no wind, version unrecorded; ~2x sim/SITL gap unexplained.
+- SITL: single flights, ArduCopter only, no wind, version V4.8.0-dev 1ea89b0b (recorded 2026-10-08); ~2x sim/SITL gap unexplained.
 - Fari 2020 / Wang 2022 formulation unread; Beard & McLain vector field not checked against the book.
 - Section-2 novelty sentence unverified against groups 3-4 of references.md.

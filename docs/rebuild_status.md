@@ -22,7 +22,7 @@ in earlier summaries are NOT evidence until they reproduce here.
   no source was available to check it. On arcs the repo uses the straight-line field plus curvature
   feed-forward, which is NOT the book's orbit field. Say "straight-line vector field with curvature
   feed-forward".
-- ArduCopter SITL results (results/sitl_*): unchanged from the original repo; no ground truth.
+- ArduCopter SITL results (results/sitl_*): original runs unchanged; no ground truth. See 'SITL re-run 2026-10-08' below.
 
 ## Result that did NOT reproduce
 Earlier summary: "whole-path winner is distinguishably worse in arcs in 7/18 (quad), 6/18 (fixed-wing)".
@@ -81,3 +81,12 @@ clothoid route arms (planner vs controller), fig4-8 for six laws, claims doc, pa
   chi_des = -chi_inf (2/pi) arctan(k d), the same form as ours (chi_inf, 2/pi, arctan, gain on cross-track error).
   Its orbit field, chi_des = gamma - lambda pi/2 - arctan(k(d-R)), is NOT ours. Ours = straight-line field + curvature feed-forward.
   => the straight-line formula is consistent with a published statement, NOT confirmed against the book.
+
+## SITL re-run 2026-10-08 (run by Fizza on her Mac)
+- Setup: ArduCopter V4.8.0-dev (1ea89b0b), SITL QUAD/PLUS, MAVProxy udp:127.0.0.1:14550, wind 0, GUIDED velocity wrapper,
+  horizon 0.5 s, 10 Hz. Reference = planned path; position = EKF output (no ground truth).
+- One flight: L1, planned radius 25.0 m, path 733 m, finished=True, rms 0.69 m (0.055 r_min), max 1.86 m (0.149 r_min).
+  Earlier SITL L1: rms 0.69 m, max 1.87 / 1.88 m. Same numbers on a fresh build -> repeatable at this one setting.
+- Screenshots (map + console) show take-off to 10 m, GUIDED flight with a curved track, LAND, DISARMED. They contain no error numbers.
+- Still missing: horizon sweep (0.25, 0.75), L1 at 7.5 m, vector_field and lead_vf flights, any repeat flights, ArduPlane.
+  Until those exist, SITL is "one setting, one law, repeated once": a sanity check, not a validation of the rankings.
