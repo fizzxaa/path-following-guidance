@@ -68,6 +68,8 @@ def simulate(path: Path, vehicle: VehicleParams, law: Guidance,
     sigma = cfg.gust_frac * cfg.wind_speed
     a_act = 0.0
 
+    if hasattr(law, "set_dt"):
+        law.set_dt(cfg.dt)
     law.reset(path, x, y)
     t_max = cfg.t_max_factor * path.length / vehicle.airspeed
     n_max = int(t_max / cfg.dt)

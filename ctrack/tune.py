@@ -20,7 +20,7 @@ import time
 
 import numpy as np
 
-from .guidance import DEFAULT_PARAMS, LAW_NAMES
+from .guidance import ALL_LAW_NAMES, DEFAULT_PARAMS
 from .scenarios import TUNE_ROUTE_SEEDS, run_scenario
 from .vehicles import VEHICLES
 
@@ -32,11 +32,11 @@ TUNE_CONDITIONS = [
 ]
 
 
-def tuning_score(veh, law_name, params, stride=4):
+def tuning_score(veh, law_name, params, stride=4, route_kind="dubins"):
     scores = []
     for rs in TUNE_ROUTE_SEEDS:
         for ci, cond in enumerate(TUNE_CONDITIONS):
-            s = run_scenario(veh, law_name, params, rs, cond, sim_seed=rs * 1000 + ci, cte_stride=stride)
+            s = run_scenario(veh, law_name, params, rs, cond, sim_seed=rs * 1000 + ci, cte_stride=stride, route_kind=route_kind)
             scores.append(s["score"])
     return float(np.mean(scores))
 
@@ -47,6 +47,22 @@ def candidates(law_name, rng, n_random):
         vals = sorted(set(np.round(np.linspace(0.8, 5.0, 15), 2).tolist() + [d["lookahead_time"]]))
         return [{"lookahead_time": float(v)} for v in vals]
     out = [dict(d)]                       # the default gains are always candidate 0
+    if law_name == "carrot_chasing":
+        for _ in range(n_random):
+            out.append({"delta_time": float(math.exp(rng.uniform(math.log(0.8), math.log(5.0)))),
+                        "kappa": float(math.exp(rng.uniform(math.log(0.3), math.log(4.0))))})
+        return out
+    if law_name == "adaptive_vf":
+        for _ in range(n_random):
+            out.append({
+                "k_e_scale": float(math.exp(rng.uniform(math.log(0.1), math.log(2.0)))),
+                "chi_inf_deg": float(rng.uniform(30.0, 85.0)),
+                "k_chi": float(math.exp(rng.uniform(math.log(0.3), math.log(3.0)))),
+                "gamma_theta": float(math.exp(rng.uniform(math.log(0.05), math.log(2.0)))),
+                "gamma_d": float(math.exp(rng.uniform(math.log(0.02), math.log(1.0)))),
+                "sigma": float(math.exp(rng.uniform(math.log(0.05), math.log(2.0)))),   # floor 0.05: keeps estimates bounded
+            })
+        return out
     for _ in range(n_random):
         c = {
             "k_e_scale": float(math.exp(rng.uniform(math.log(0.1), math.log(2.0)))),
@@ -65,20 +81,23 @@ def main():
     ap.add_argument("--n-random", type=int, default=60, help="random candidates for vector_field")
     ap.add_argument("--out", default="results/tuned_params.json")
     ap.add_argument("--seed", type=int, default=0)
+    ap.add_argument("--route-kind", default="dubins", choices=["dubins", "dubins_smooth"])
+    ap.add_argument("--laws", nargs="*", default=None, help="only these laws; merged into --out if it exists")
     args = ap.parse_args()
+    laws = args.laws or list(ALL_LAW_NAMES)
 
-    result = {}
+    result = json.load(open(args.out)) if (args.laws and os.path.exists(args.out)) else {}
     t0 = time.time()
     for vname, veh in VEHICLES.items():
-        result[vname] = {}
-        for law in LAW_NAMES:
+        result.setdefault(vname, {})
+        for law in laws:
             rng = np.random.default_rng(args.seed)
             cands = candidates(law, rng, args.n_random)
             default_score = None
             best = (float("inf"), None)
             for i, params in enumerate(cands):
-                sc = tuning_score(veh, law, params)
-                if i == 0 and law in ("vector_field", "lead_vf"):
+                sc = tuning_score(veh, law, params, route_kind=args.route_kind)
+                if i == 0 and law not in ("pure_pursuit", "l1"):
                     default_score = sc
                 if law in ("pure_pursuit", "l1") and params["lookahead_time"] == DEFAULT_PARAMS[law]["lookahead_time"]:
                     default_score = sc
