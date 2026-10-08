@@ -7,7 +7,7 @@ what breaks when the plan is too tight or the vehicle is weaker than assumed?
 
 This repo has:
 - a **Dubins planner** (all six path types) and a waypoint-to-route builder,
-- **six guidance laws**: pure pursuit, L1, vector field, `lead_vf` (vector field that reads the curvature ahead), and two author-adapted laws, an adaptive vector field and carrot chasing (not reproductions of published laws),
+- **six guidance laws**: pure pursuit, L1, vector field, `lead_vf` (vector field that reads the curvature ahead), and two adapted laws, an adaptive vector field and carrot chasing (not reproductions of published laws),
 - a **fast 2-D simulator** (constant airspeed, lateral-acceleration limit and lag, steady wind plus gusts),
 - a **benchmark** (2 vehicles x 6 laws x 3 wind levels x 3 planned radii x 2 limit mismatches x seeds),
 - an **ArduCopter SITL runner** (tested against fakes, and flown in ArduCopter SITL: ten flights, see "Real autopilot check"),
@@ -46,7 +46,7 @@ ctrack/robustness.py  sensor noise / delay / slower response / slower airspeed o
 ctrack/ablations.py   lead-time sweep, feed-forward on/off, L1 lookahead sweep
 ctrack/estimate_lag.py  fit the real copter's response (gain, lag) from a SITL log
 ctrack/paper_figures.py paper-style figures and tables generated from results/*.csv
-paper_fig/            report v2 (PDF and HTML source) and its figures
+paper_fig/            the report (PDF and HTML source) and its figures
 docs/                 claim list and rebuild status
 scripts/              held-out comparison, segment analysis, planner-vs-controller, sensitivity, figures
 ctrack/benchmark.py   the exploratory sweep on the fixed route -> results/benchmark.csv
@@ -96,7 +96,7 @@ of the old numbers did not reproduce and were withdrawn. The current numbers, wi
 - `docs/claims.md`: the frozen claim list (what stands, what needs a caveat, what was dropped).
 - `docs/rebuild_status.md`: what was verified and what was not.
 - `results/segments_report_6laws.md`, `results/planner_vs_controller.md`, `results/sensitivity_report.md`: the tables.
-- `paper_fig/path-following-report-v2.pdf`: the report.
+- `paper_fig/path-following-report.pdf`: the report.
 
 Main findings, whole-path RMS error in metres on 12 unseen routes (quadcopter, planned at the limit): L1 0.474,
 vector field 1.018, lead vector field 0.522. The route matters about as much as the law: smoothing the route lowers the
