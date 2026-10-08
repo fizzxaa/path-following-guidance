@@ -7,28 +7,28 @@ what breaks when the plan is too tight or the vehicle is weaker than assumed?
 
 This repo has:
 - a **Dubins planner** (all six path types) and a waypoint-to-route builder,
-- **four guidance laws**: pure pursuit, L1, vector field, and `lead_vf` (a small modification of the vector-field law, see Results),
+- **six guidance laws**: pure pursuit, L1, vector field, `lead_vf` (vector field that reads the curvature ahead), and two author-adapted laws, an adaptive vector field and carrot chasing (not reproductions of published laws),
 - a **fast 2-D simulator** (constant airspeed, lateral-acceleration limit and lag, steady wind plus gusts),
-- a **benchmark** (2 vehicles x 4 laws x 3 wind levels x 3 planned radii x 2 limit mismatches x seeds),
-- an **ArduCopter SITL runner** (tested against fakes, and flown in ArduCopter SITL: nine flights, see "Real autopilot check"),
+- a **benchmark** (2 vehicles x 6 laws x 3 wind levels x 3 planned radii x 2 limit mismatches x seeds),
+- an **ArduCopter SITL runner** (tested against fakes, and flown in ArduCopter SITL: ten flights, see "Real autopilot check"),
 - **random routes**, a **tuning script** and a **held-out evaluation** with error bars,
 - an **animation** script (GIF),
-- 83 tests.
+- 194 tests, a segment-resolved analysis (straight / transition / arc), a planner-versus-controller study and a sensitivity check of every claim (`docs/claims.md`).
 
 ## Setup and run
 
 ```bash
 pip install -r requirements.txt
-python -m pytest tests -q                    # 83 tests
-python -m ctrack.benchmark --quick           # ~30 s, exploratory run on the fixed route
-python -m ctrack.tune                        # ~4 min: tune each law on TUNING routes only
-python -m ctrack.evaluate                    # ~4 min: test default vs tuned on unseen routes
-python -m ctrack.robustness                  # ~4 min: noise, delay, slower response, slower airspeed
-python -m ctrack.ablations                   # ~4 min: which ingredient of each law matters
-python -m ctrack.plots                       # writes results/fig1..fig3
+python -m pytest tests -q                    # 194 tests
+python scripts/heldout_segments.py --help   # held-out comparison (writes results/heldout_segments*.csv)
+python scripts/analyse_segments.py --help    # segment-resolved report
+python scripts/planner_vs_controller.py      # route effect vs law effect
+python scripts/sensitivity.py                # sensitivity of the claims
+python scripts/make_paper_figs.py            # figures for the report
 ```
-`evaluate` writes `results/heldout.csv`, `results/heldout_stats.csv` and `results/fig4_heldout_scores.png`.
-Add `--reuse` to `evaluate` to redo the statistics without re-running the simulations.
+Older commands (`ctrack.benchmark`, `ctrack.evaluate`, `ctrack.robustness`, `ctrack.ablations`, `ctrack.plots`,
+`ctrack.animate`) still run, but their old outputs were removed from `results/` on 2026-10-08 because they used the
+earlier metric and did not all reproduce. `python -m ctrack.tune` re-tunes the laws on the tuning routes.
 
 ## Layout
 
@@ -36,7 +36,7 @@ Add `--reuse` to `evaluate` to redo the statistics without re-running the simula
 ctrack/dubins.py      shortest Dubins path, sampling
 ctrack/route.py       chain Dubins paths through waypoints; the benchmark route
 ctrack/vehicles.py    fixed-wing and quadcopter parameters (r_min = V^2 / a_max)
-ctrack/guidance.py    PurePursuit, L1, VectorField
+ctrack/guidance.py    PurePursuit, L1, VectorField, lead_vf, AdaptiveVectorField, CarrotChasing
 ctrack/sim.py         2-D simulator with wind, gusts, lag, limit mismatch
 ctrack/metrics.py     cross-track error, saturation, control effort
 ctrack/scenarios.py   test conditions, route seeds, and the one function that runs a scenario
@@ -46,14 +46,16 @@ ctrack/robustness.py  sensor noise / delay / slower response / slower airspeed o
 ctrack/ablations.py   lead-time sweep, feed-forward on/off, L1 lookahead sweep
 ctrack/estimate_lag.py  fit the real copter's response (gain, lag) from a SITL log
 ctrack/paper_figures.py paper-style figures and tables generated from results/*.csv
-paper/                claim and outline, related-work notes, LaTeX skeleton, figures, tables
+paper_fig/            report v2 (PDF and HTML source) and its figures
+docs/                 claim list and rebuild status
+scripts/              held-out comparison, segment analysis, planner-vs-controller, sensitivity, figures
 ctrack/benchmark.py   the exploratory sweep on the fixed route -> results/benchmark.csv
 ctrack/plots.py       figures
 ctrack/animate.py     animated GIF of the four laws on the same route; optional CSV export
 sitl/sitl_quad_runner.py   ArduCopter SITL via pymavlink
 ctrack/sitl_control.py    the tested control step and log saving used by the runner
 ctrack/plot_sitl.py       plot SITL logs
-tests/                Dubins and guidance tests
+tests/                Dubins, guidance, known-answer, published-formula and independent-copy tests
 ```
 
 ## What the tests check
@@ -79,7 +81,7 @@ for more turn than the vehicle can give. A still image of the last frame is save
 simulator view use ArduPilot SITL (see below); it shows the vehicle on a map.
 
 ## How the comparison is set up (so it is fair)
-- **Score** (lower is better) = RMS cross-track error + 0.25 x worst error, both in turning radii, +1 if the run did not finish. Errors are measured after the start transient.
+- **Metric**: RMS distance to the planned path in metres (exact projection onto the path polyline), measured after the first 4 turning radii of travel, reported on straights, transitions and arcs.
 - **Tuning routes** (random routes, seeds 1000-1005) and **test routes** (random, seeds 2000-2011) never overlap. A fixed "standard" route is kept as an extra check.
 - **Conditions** (same on test): wind 0 / 15 / 30% of airspeed x planned radius 1.0 / 1.5 / 2.0 x true vehicle limit 100% / 80% of what the planner assumed.
 - Each law is tuned separately for each vehicle. Default gains are always one of the candidates.
@@ -87,37 +89,18 @@ simulator view use ArduPilot SITL (see below); it shows the vehicle on a map.
 
 ## Results (simulation only; test routes never used for tuning or design)
 
-All numbers are the mean **score** (lower is better; see above) over the 12 test routes, tuned gains unless stated.
-Figures: `fig4_heldout_scores.png`, `fig5_robustness.png`. Paired statistics: `results/heldout_stats.csv`.
+The earlier results in this README (a score of RMS + 0.25 x worst error, a nearest-sample distance, four laws) were
+replaced on 2026-10-08 after a rebuild with an exact distance-to-path metric, six laws and segment-resolved errors. Some
+of the old numbers did not reproduce and were withdrawn. The current numbers, with the evidence for each claim, are in:
 
-| condition | fixed-wing: L1 | vector field | `lead_vf` | quadcopter: L1 | vector field | `lead_vf` |
-|---|---|---|---|---|---|---|
-| limit respected (radius >= x1.5, vehicle as rated) | 0.032 | 0.029 | 0.036 | 0.028 | 0.028 | 0.027 |
-| vehicle 20% weaker than assumed | 0.057 | 0.084 | 0.061 | 0.051 | 0.070 | 0.050 |
-| planned at the limit (radius x1.0) | 0.089 | 0.189 | 0.096 | 0.087 | 0.174 | 0.095 |
+- `docs/claims.md`: the frozen claim list (what stands, what needs a caveat, what was dropped).
+- `docs/rebuild_status.md`: what was verified and what was not.
+- `results/segments_report_6laws.md`, `results/planner_vs_controller.md`, `results/sensitivity_report.md`: the tables.
+- `paper_fig/path-following-report-v2.pdf`: the report.
 
-**1. Why the vector-field law fails at the limit (and why my first explanation was wrong).**
-- I first guessed the correction field was too steep for the vehicle to follow, and built a "limit-aware" law that softened it when the path needed most of the turning. It barely helped (quadcopter at the limit 0.171 to 0.165, against 0.084 for L1), so it was removed.
-- Direct tests on the tuning routes: a gentler field, a smaller approach angle and capping the feed-forward did nothing; removing the feed-forward made it much worse.
-- A clean trace (no wind, no start offset): the law asks for 2.9-3.5 m/s^2 while the vehicle can give 2.0. It stays saturated for about 3 s and the error grows to 1.7 m. L1 never asks for more than the limit.
-- Cause: the vehicle's lateral acceleration responds to a command with a lag (0.3-0.5 s here), but the law applies the path curvature for the point it is on, so it starts turning late. When the plan needs the vehicle's full turning ability there is no spare authority to catch up.
-
-**2. The fix, `lead_vf`.** The same law, but the curvature feed-forward is read about 0.6 s **ahead** along the path. Reading the path heading ahead as well did not help. It was designed on the tuning routes only.
-- At the limit it about **halves** the vector-field law's error (0.189 to 0.096 fixed-wing, 0.174 to 0.095 quadcopter). L1 is still slightly better there, and the paired interval excludes zero.
-- With default gains (lead 0.6 s) it was the best of the four when the limit is respected (fixed-wing 0.025 against 0.032 for tuned L1) and when the fixed-wing is weaker than assumed.
-- Tuning moved it toward the hard case and cost accuracy in easy conditions (fixed-wing, limit respected: 0.025 default, 0.036 tuned). **No single law wins everywhere.** Which one is "best" depends on which conditions you weight, and the tuning objective is a choice.
-
-**3. Robustness** (`ctrack/robustness.py`, one imperfection at a time, fixed-wing typical / at limit):
-- Sensor noise (2% of r_min position, 5% of airspeed velocity) barely changes any law. `lead_vf` is slightly worse under velocity noise.
-- The plain vector-field law is fragile to timing: a 0.2 s sensor delay takes it from 0.026 to 0.064 (typical), a response lag twice as long to 0.087. `lead_vf` stays flat (0.034 to 0.034 with delay, 0.035 with double lag). L1 rises from 0.029 to 0.043 with double lag.
-- At the limit with double lag: `lead_vf` 0.080, L1 0.093, vector field 0.216 (fixed-wing). Quadcopter: `lead_vf` and L1 are tied.
-- A slower true airspeed makes every law score better, because the turn it needs is smaller. That is not a fair test of tolerance; ignore that row.
-
-**4. Ablations** (`ctrack/ablations.py`, 6 test routes, other gains at default):
-- `lead_time` has a sweet spot. Fixed-wing at the limit: 0 s = 0.189, 0.4 s = 0.127, 0.8 s = 0.096, 1.2 s = 0.103. Quadcopter at the limit is best at 0.6-0.8 s. Too much lead hurts again.
-- The best lead is roughly 1.6 to 2.7x each vehicle's response lag (0.3 s quadcopter, 0.5 s fixed-wing). Two vehicles are not enough to call that a rule; it is a hypothesis.
-- Removing the vector-field law's feed-forward roughly triples its error when the limit is respected (0.031 to 0.088).
-- **L1's lookahead is a trade-off:** 1.0 s gives the best accuracy when the limit is respected (fixed-wing 0.014, better than any other setting of any law) but is poor at the limit (0.134). 2.5 s is best at the limit (0.085). L1's tuned values were picked with a tuning set weighted toward hard cases.
+Main findings, whole-path RMS error in metres on 12 unseen routes (quadcopter, planned at the limit): L1 0.474,
+vector field 1.018, lead vector field 0.522. The route matters about as much as the law: smoothing the route lowers the
+vector field's error from 0.50 to 0.18 m. Rankings change with the route type, and no law wins everywhere.
 
 ## Real autopilot check (ArduCopter SITL; no wind, default gains, one flight per cell)
 
@@ -140,7 +123,7 @@ Caveats: one flight per cell (SITL without wind is nearly repeatable: two L1 fli
 
 ## SITL (ArduCopter) step by step
 
-**Status.** The runner has been flown in ArduCopter SITL on macOS (nine flights; results in "Real autopilot check").
+**Status.** The runner has been flown in ArduCopter SITL on macOS (ten flights; results in "Real autopilot check").
 The control maths is also tested against a fake copter (north/east conversions included), and the whole runner
 against a fake MAVLink connection. The first real runs needed fixes (GUIDED mode retried together with arming,
 identifying the vehicle from its heartbeat), which are described below.
@@ -190,6 +173,3 @@ heartbeats, so failures had no visible reason. The runner now reads every messag
 heartbeat (ignoring ground-station heartbeats), addresses every command to it, reads the flight mode and armed state
 directly from the heartbeat, and prints every `[ArduPilot]` message.
 
-**Flying the new law:** `--law lead_vf` works in the runner (it is in `LAW_NAMES`). The flown comparison used `l1`, `vector_field` and `lead_vf` at `--radius-factor 2.0` and `1.0`, and `vector_field` and `lead_vf` at `0.6`; see "Real autopilot check".
-
-**What to write up:** the questions to answer are (1) do the real-controller results rank the laws as the simulation did, and (2) if not, why not (acceleration limit, response lag)? A result that disagrees with the 2-D model, explained honestly, is worth more than one that matches.
