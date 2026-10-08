@@ -1,0 +1,128 @@
+{
+  "fixed_wing": {
+    "pure_pursuit": {
+      "params": {
+        "lookahead_time": 1.4
+      },
+      "tuning_score": 0.03732765177710511,
+      "default_tuning_score": 0.04290133734673451,
+      "n_candidates": 16
+    },
+    "l1": {
+      "params": {
+        "lookahead_time": 1.4
+      },
+      "tuning_score": 0.03717924485445327,
+      "default_tuning_score": 0.042128351442255456,
+      "n_candidates": 16
+    },
+    "vector_field": {
+      "params": {
+        "k_e_scale": 0.5025390680280559,
+        "chi_inf_deg": 54.35140559359923,
+        "k_chi": 2.559402387282078,
+        "feedforward": true
+      },
+      "tuning_score": 0.04015573067565183,
+      "default_tuning_score": 0.051123700432916495,
+      "n_candidates": 41
+    },
+    "lead_vf": {
+      "params": {
+        "k_e_scale": 0.6410860175625329,
+        "chi_inf_deg": 84.73030778794282,
+        "k_chi": 2.6672574058628014,
+        "feedforward": true,
+        "lead_time": 0.6900677089636441
+      },
+      "tuning_score": 0.03634434186052052,
+      "default_tuning_score": 0.042451983004923526,
+      "n_candidates": 41
+    },
+    "adaptive_vf": {
+      "params": {
+        "k_e_scale": 0.2805159824015789,
+        "chi_inf_deg": 53.66643025713083,
+        "k_chi": 2.774491096672792,
+        "gamma_theta": 0.39783147926028994,
+        "gamma_d": 0.05505961555122489,
+        "sigma": 0.12194078788486072
+      },
+      "tuning_score": 0.03856663586123863,
+      "default_tuning_score": 0.056460480288812204,
+      "n_candidates": 41
+    },
+    "carrot_chasing": {
+      "params": {
+        "delta_time": 1.1531354990049563,
+        "kappa": 3.443029842671636
+      },
+      "tuning_score": 0.032019094416187874,
+      "default_tuning_score": 0.039315680203197416,
+      "n_candidates": 41
+    }
+  },
+  "quadcopter": {
+    "pure_pursuit": {
+      "params": {
+        "lookahead_time": 1.4
+      },
+      "tuning_score": 0.04421014416903712,
+      "default_tuning_score": 0.05802256745125529,
+      "n_candidates": 16
+    },
+    "l1": {
+      "params": {
+        "lookahead_time": 1.4
+      },
+      "tuning_score": 0.04410104337564075,
+      "default_tuning_score": 0.05787372123719175,
+      "n_candidates": 16
+    },
+    "vector_field": {
+      "params": {
+        "k_e_scale": 0.31562835129218075,
+        "chi_inf_deg": 84.84654646840661,
+        "k_chi": 2.8704936699701085,
+        "feedforward": true
+      },
+      "tuning_score": 0.04897664690706058,
+      "default_tuning_score": 0.05500606754402723,
+      "n_candidates": 41
+    },
+    "lead_vf": {
+      "params": {
+        "k_e_scale": 0.6410860175625329,
+        "chi_inf_deg": 84.73030778794282,
+        "k_chi": 2.6672574058628014,
+        "feedforward": true,
+        "lead_time": 0.6900677089636441
+      },
+      "tuning_score": 0.04597736470320891,
+      "default_tuning_score": 0.04924267835906214,
+      "n_candidates": 41
+    },
+    "adaptive_vf": {
+      "params": {
+        "k_e_scale": 0.5644029516315316,
+        "chi_inf_deg": 63.12315470087942,
+        "k_chi": 2.7513405429179474,
+        "gamma_theta": 0.06527446109849595,
+        "gamma_d": 0.14140632189959235,
+        "sigma": 0.7781419080297666
+      },
+      "tuning_score": 0.04851282107370128,
+      "default_tuning_score": 0.0586988977692945,
+      "n_candidates": 41
+    },
+    "carrot_chasing": {
+      "params": {
+        "delta_time": 1.3829811806795387,
+        "kappa": 1.7103079865530046
+      },
+      "tuning_score": 0.04056477325264394,
+      "default_tuning_score": 0.04646515977693998,
+      "n_candidates": 41
+    }
+  }
+}

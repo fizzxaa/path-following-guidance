@@ -38,6 +38,38 @@
       "tuning_score": 0.0645829692886402,
       "default_tuning_score": 0.06836955254573032,
       "n_candidates": 61
+    },
+    "adaptive_vf": {
+      "params": {
+        "k_e_scale": 0.5644029516315316,
+        "chi_inf_deg": 63.12315470087942,
+        "k_chi": 2.7513405429179474,
+        "gamma_theta": 0.06527446109849595,
+        "gamma_d": 0.14140632189959235,
+        "sigma": 0.7781419080297666
+      },
+      "tuning_score": 0.11220808726526582,
+      "default_tuning_score": 0.13746318858476092,
+      "n_candidates": 41
+    },
+    "carrot_chasing": {
+      "params": {
+        "delta_time": 1.6397276646477938,
+        "kappa": 3.0104080004904525
+      },
+      "tuning_score": 0.055700594640954525,
+      "default_tuning_score": 0.06372091472184493,
+      "n_candidates": 41
+    },
+    "carrot_tangent": {
+      "params": {
+        "delta_time": 1.6397276646477938,
+        "kappa": 3.0104080004904525
+      },
+      "tuning_score": 0.055700594640954525,
+      "default_tuning_score": 0.06372091472184493,
+      "n_candidates": 41,
+      "note": "same gains as arc-carrot, not retuned"
     }
   },
   "quadcopter": {
@@ -79,6 +111,38 @@
       "tuning_score": 0.06625008284104242,
       "default_tuning_score": 0.06780136114753277,
       "n_candidates": 61
+    },
+    "adaptive_vf": {
+      "params": {
+        "k_e_scale": 0.4286337608806726,
+        "chi_inf_deg": 78.92183088919501,
+        "k_chi": 2.5772987948359543,
+        "gamma_theta": 0.18714549366911443,
+        "gamma_d": 0.18708632094124789,
+        "sigma": 0.1639170306399794
+      },
+      "tuning_score": 0.10468475631987331,
+      "default_tuning_score": 0.11319464090457743,
+      "n_candidates": 41
+    },
+    "carrot_chasing": {
+      "params": {
+        "delta_time": 1.1531354990049563,
+        "kappa": 3.443029842671636
+      },
+      "tuning_score": 0.05695523890143376,
+      "default_tuning_score": 0.06460044578315821,
+      "n_candidates": 41
+    },
+    "carrot_tangent": {
+      "params": {
+        "delta_time": 1.1531354990049563,
+        "kappa": 3.443029842671636
+      },
+      "tuning_score": 0.05695523890143376,
+      "default_tuning_score": 0.06460044578315821,
+      "n_candidates": 41,
+      "note": "same gains as arc-carrot, not retuned"
     }
   }
 }

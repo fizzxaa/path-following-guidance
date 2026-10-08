@@ -10,7 +10,8 @@ import itertools
 
 from .guidance import make_law
 from .metrics import summarize
-from .route import build_route, random_route, standard_route
+from .route import random_route, standard_route
+from .route_kinds import build_path
 from .sim import SimConfig, simulate
 from .vehicles import VehicleParams
 
@@ -25,19 +26,19 @@ TEST_ROUTE_SEEDS = list(range(2000, 2012))
 _path_cache: dict = {}
 
 
-def get_path(veh: VehicleParams, route_seed, rf: float):
+def get_path(veh: VehicleParams, route_seed, rf: float, route_kind: str = "dubins"):
     """Route for a vehicle. route_seed=None -> the fixed standard route."""
-    key = (veh.name, route_seed, rf)
+    key = (veh.name, route_seed, rf, route_kind)
     if key not in _path_cache:
         wps = standard_route(veh.r_min) if route_seed is None else random_route(veh.r_min, route_seed)
-        _path_cache[key] = build_route(wps, rf * veh.r_min)
+        _path_cache[key] = build_path(route_kind, wps, rf * veh.r_min)
     return _path_cache[key]
 
 
 def run_scenario(veh: VehicleParams, law_name: str, params, route_seed, cond, sim_seed: int,
-                 cte_stride: int = 1):
+                 cte_stride: int = 1, route_kind: str = "dubins"):
     wind_frac, rf, mism = cond
-    path = get_path(veh, route_seed, rf)
+    path = get_path(veh, route_seed, rf, route_kind)
     law = make_law(law_name, veh.r_min, params)
     cfg = SimConfig(wind_speed=wind_frac * veh.airspeed, limit_mismatch=mism)
     res = simulate(path, veh, law, cfg, seed=sim_seed)

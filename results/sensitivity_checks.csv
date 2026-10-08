@@ -1,0 +1,45 @@
+vehicle,cond,pert,C1a,C1b,C2a,C2b,C3,not_completed
+fixed_wing,"typical (wind .15, r x1.5)",none,True,True,True,False,False,0
+fixed_wing,"typical (wind .15, r x1.5)",lag x0.5,True,True,False,False,False,0
+fixed_wing,"typical (wind .15, r x1.5)",lag x1.5,True,True,True,True,False,0
+fixed_wing,"typical (wind .15, r x1.5)",lag x2,True,False,True,True,True,0
+fixed_wing,"typical (wind .15, r x1.5)",true a_max x0.8,True,False,True,True,False,0
+fixed_wing,"typical (wind .15, r x1.5)",true a_max x0.6,True,False,True,True,False,0
+fixed_wing,"typical (wind .15, r x1.5)",position noise 2% r_min,True,True,True,False,False,0
+fixed_wing,"typical (wind .15, r x1.5)",velocity noise 5%,True,True,True,False,False,0
+fixed_wing,"typical (wind .15, r x1.5)",sensor delay 0.2 s,True,True,True,True,True,0
+fixed_wing,"typical (wind .15, r x1.5)",gusts x3 (std 75% of wind),True,False,True,True,False,0
+fixed_wing,"typical (wind .15, r x1.5)",wind 30%,True,False,True,True,False,0
+fixed_wing,"at limit (wind .15, r x1.0)",none,True,False,True,True,True,0
+fixed_wing,"at limit (wind .15, r x1.0)",lag x0.5,True,True,True,True,True,0
+fixed_wing,"at limit (wind .15, r x1.0)",lag x1.5,True,False,True,True,False,0
+fixed_wing,"at limit (wind .15, r x1.0)",lag x2,True,False,True,True,False,0
+fixed_wing,"at limit (wind .15, r x1.0)",true a_max x0.8,True,False,True,True,False,0
+fixed_wing,"at limit (wind .15, r x1.0)",true a_max x0.6,False,False,True,True,False,0
+fixed_wing,"at limit (wind .15, r x1.0)",position noise 2% r_min,True,False,True,True,True,0
+fixed_wing,"at limit (wind .15, r x1.0)",velocity noise 5%,True,False,True,True,True,0
+fixed_wing,"at limit (wind .15, r x1.0)",sensor delay 0.2 s,True,False,True,True,False,0
+fixed_wing,"at limit (wind .15, r x1.0)",gusts x3 (std 75% of wind),True,False,True,True,True,0
+fixed_wing,"at limit (wind .15, r x1.0)",wind 30%,True,False,True,True,False,0
+quadcopter,"typical (wind .15, r x1.5)",none,True,True,True,True,False,0
+quadcopter,"typical (wind .15, r x1.5)",lag x0.5,True,True,False,False,False,0
+quadcopter,"typical (wind .15, r x1.5)",lag x1.5,True,True,True,True,False,0
+quadcopter,"typical (wind .15, r x1.5)",lag x2,True,False,True,True,False,0
+quadcopter,"typical (wind .15, r x1.5)",true a_max x0.8,True,False,True,True,False,0
+quadcopter,"typical (wind .15, r x1.5)",true a_max x0.6,True,False,True,True,False,0
+quadcopter,"typical (wind .15, r x1.5)",position noise 2% r_min,True,True,True,True,False,0
+quadcopter,"typical (wind .15, r x1.5)",velocity noise 5%,True,False,True,True,False,0
+quadcopter,"typical (wind .15, r x1.5)",sensor delay 0.2 s,True,True,True,True,False,0
+quadcopter,"typical (wind .15, r x1.5)",gusts x3 (std 75% of wind),True,False,True,True,False,0
+quadcopter,"typical (wind .15, r x1.5)",wind 30%,True,False,True,True,False,0
+quadcopter,"at limit (wind .15, r x1.0)",none,True,False,True,True,False,0
+quadcopter,"at limit (wind .15, r x1.0)",lag x0.5,True,False,True,True,True,0
+quadcopter,"at limit (wind .15, r x1.0)",lag x1.5,True,False,True,True,False,0
+quadcopter,"at limit (wind .15, r x1.0)",lag x2,True,False,True,True,False,0
+quadcopter,"at limit (wind .15, r x1.0)",true a_max x0.8,True,False,True,True,False,0
+quadcopter,"at limit (wind .15, r x1.0)",true a_max x0.6,False,True,True,True,False,0
+quadcopter,"at limit (wind .15, r x1.0)",position noise 2% r_min,True,False,True,True,False,0
+quadcopter,"at limit (wind .15, r x1.0)",velocity noise 5%,True,False,True,True,False,0
+quadcopter,"at limit (wind .15, r x1.0)",sensor delay 0.2 s,True,False,True,True,False,0
+quadcopter,"at limit (wind .15, r x1.0)",gusts x3 (std 75% of wind),True,False,True,True,True,0
+quadcopter,"at limit (wind .15, r x1.0)",wind 30%,True,False,True,True,False,0
